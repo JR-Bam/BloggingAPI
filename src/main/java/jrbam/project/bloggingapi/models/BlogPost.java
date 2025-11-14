@@ -9,12 +9,6 @@ public class BlogPost {
     private @Id Long id;
 
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "title", column = @Column(name = "content_title")),
-            @AttributeOverride( name = "content", column = @Column(name = "content_content")),
-            @AttributeOverride( name = "category", column = @Column(name = "content_category")),
-            @AttributeOverride( name = "tags", column = @Column(name = "content_tags"))
-    })
     private BlogPostContent content;
 
     private @Temporal(TemporalType.TIMESTAMP) java.util.Date createdAt;
@@ -23,5 +17,10 @@ public class BlogPost {
     public BlogPost() {
         this.createdAt = new java.util.Date();
         this.updatedAt = new java.util.Date();
+    }
+
+    public BlogPost(BlogPostContent content) {
+        this();
+        this.content = content;
     }
 }
